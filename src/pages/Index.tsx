@@ -1,15 +1,17 @@
 
 import { useState } from 'react';
-import { Calendar, Clock, AlertTriangle, TrendingUp, Activity, Zap } from 'lucide-react';
+import { Calendar, Clock, AlertTriangle, TrendingUp, Activity, Zap, Building2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import SolarWindChart from '@/components/SolarWindChart';
 import CMEEventCard from '@/components/CMEEventCard';
 import ParticleFluxChart from '@/components/ParticleFluxChart';
 import AlertPanel from '@/components/AlertPanel';
+import IndustryDashboard from '@/components/IndustryDashboard';
 
 const Index = () => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
@@ -27,11 +29,14 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 text-white p-6">
-      {/* Animated stars background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.1\"%3E%3Ccircle cx=\"7\" cy=\"7\" r=\"1\"/%3E%3Ccircle cx=\"27\" cy=\"27\" r=\"1\"/%3E%3Ccircle cx=\"47\" cy=\"47\" r=\"1\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] animate-pulse"></div>
-      </div>
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 text-white p-6">
+        {/* Animated stars background */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 animate-pulse" style={{ 
+            backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='27' cy='27' r='1'/%3E%3Ccircle cx='47' cy='47' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" 
+          }} />
+        </div>
 
       <div className="relative z-10">
         {/* Header */}
@@ -43,10 +48,24 @@ const Index = () => {
           <p className="text-sm text-purple-300">Real-time monitoring of Halo Coronal Mass Ejection events</p>
         </div>
 
-        {/* Alert Panel */}
-        <AlertPanel cmeDetected={cmeDetected} />
+        {/* Main Navigation */}
+        <Tabs defaultValue="monitoring" className="w-full mb-8">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 bg-black/50">
+            <TabsTrigger value="monitoring" className="data-[state=active]:bg-purple-600">
+              <Activity className="h-4 w-4 mr-2" />
+              Live Monitoring
+            </TabsTrigger>
+            <TabsTrigger value="industry" className="data-[state=active]:bg-purple-600">
+              <Building2 className="h-4 w-4 mr-2" />
+              Industry Solutions
+            </TabsTrigger>
+          </TabsList>
 
-        {/* Main Grid */}
+          <TabsContent value="monitoring" className="mt-8 space-y-8">
+            {/* Alert Panel */}
+            <AlertPanel cmeDetected={cmeDetected} />
+
+            {/* Main Grid */}
         <div className="grid lg:grid-cols-3 gap-6 mb-8">
           {/* CME Event Checker */}
           <Card className="bg-black/40 border-purple-500/30 backdrop-blur-sm">
@@ -155,10 +174,17 @@ const Index = () => {
           <ParticleFluxChart />
         </div>
 
-        {/* Last CME Event */}
-        <CMEEventCard />
+            {/* Last CME Event */}
+            <CMEEventCard />
+          </TabsContent>
+
+          <TabsContent value="industry" className="mt-8">
+            <IndustryDashboard />
+          </TabsContent>
+        </Tabs>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 
