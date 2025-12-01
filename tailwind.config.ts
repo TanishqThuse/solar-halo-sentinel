@@ -52,6 +52,22 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				'space-warning': {
+					DEFAULT: 'hsl(var(--space-warning))',
+					foreground: 'hsl(var(--space-warning-foreground))'
+				},
+				'space-danger': {
+					DEFAULT: 'hsl(var(--space-danger))',
+					foreground: 'hsl(var(--space-danger-foreground))'
+				},
+				'space-info': {
+					DEFAULT: 'hsl(var(--space-info))',
+					foreground: 'hsl(var(--space-info-foreground))'
+				},
+				'space-success': {
+					DEFAULT: 'hsl(var(--space-success))',
+					foreground: 'hsl(var(--space-success-foreground))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
