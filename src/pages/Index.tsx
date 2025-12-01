@@ -12,6 +12,7 @@ import CMEEventCard from '@/components/CMEEventCard';
 import ParticleFluxChart from '@/components/ParticleFluxChart';
 import AlertPanel from '@/components/AlertPanel';
 import IndustryDashboard from '@/components/IndustryDashboard';
+import AIAssistant from '@/components/AIAssistant';
 
 const Index = () => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
@@ -184,6 +185,7 @@ const Index = () => {
         </Tabs>
       </div>
       </div>
+      <AIAssistant />
     </>
   );
 };
